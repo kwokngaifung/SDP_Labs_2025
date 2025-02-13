@@ -22,8 +22,8 @@ namespace SDP_Labs_2025
         {
             try
             {
-                int sum = Convert.ToInt32(txtNum1.Text) + Convert.ToInt32(txtNum2.Text);
-                txtNum3.Text = Convert.ToString(sum);
+                int x = Convert.ToInt32(txtNum1.Text) + Convert.ToInt32(txtNum2.Text);
+                txtNum3.Text = Convert.ToString(x);
             }
             catch (Exception ex) 
             {
