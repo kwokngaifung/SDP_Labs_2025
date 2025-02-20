@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SDP_Labs_2025.Lab2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace SDP_Labs_2025
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLab1());
+            Application.Run(new frmLab2B());
         }
     }
 }
