@@ -1,4 +1,4 @@
-﻿namespace SDP_Labs_2025
+﻿namespace SDP_Labs_2025.Lab1
 {
     partial class frmLab1
     {

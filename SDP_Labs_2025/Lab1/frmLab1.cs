@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace SDP_Labs_2025
+namespace SDP_Labs_2025.Lab1
 {
     public partial class frmLab1 : Form
     {

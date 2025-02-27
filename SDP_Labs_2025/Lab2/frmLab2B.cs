@@ -19,38 +19,34 @@ namespace SDP_Labs_2025.Lab2
 
         private void lblCloudy_CheckedChanged(object sender, EventArgs e)
         {
-            picCloudy.Visible = true;
-            picSuny.Visible = false;
-            picRainy.Visible = false;
-            picSnowy.Visible = false;
-            lblMessage.Text = "It’s going to be a Cloudy day today, " + name_input.Text;
+            updatePicture(picCloudy , "cloudy");
         }
 
         private void lblRainy_CheckedChanged(object sender, EventArgs e)
         {
-            picCloudy.Visible = false;
-            picSuny.Visible = false;
-            picRainy.Visible = true;
-            picSnowy.Visible = false;
-            lblMessage.Text = "It’s going to be a Rainy day today, " + name_input.Text;
+            updatePicture(picRainy , "rainy");
         }
 
         private void lblSuny_CheckedChanged(object sender, EventArgs e)
         {
-            picCloudy.Visible = false;
-            picSuny.Visible = true;
-            picRainy.Visible = false;
-            picSnowy.Visible = false;
-            lblMessage.Text = "It’s going to be a Suny day today, " + name_input.Text;
+            updatePicture(picSuny , "suny");
         }
 
         private void lblSnowy_CheckedChanged(object sender, EventArgs e)
         {
+            updatePicture(picSnowy , "snowy");
+           
+        }
+
+        private void updatePicture(PictureBox pic , string name)
+        {
             picCloudy.Visible = false;
             picSuny.Visible = false;
             picRainy.Visible = false;
-            picSnowy.Visible = true;
-            lblMessage.Text = "It’s going to be a Snowy day today, " + name_input.Text;
+            picSnowy.Visible = false;
+            pic.Visible = true;
+
+            lblMessage.Text = $"It’s going to be a {name} day today, {name_input.Text}";
         }
     }
 }

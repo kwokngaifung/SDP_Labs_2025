@@ -46,10 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmLab1.cs">
+    <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLab1.Designer.cs">
+    <Compile Include="frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lab1\frmLab1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lab1\frmLab1.Designer.cs">
       <DependentUpon>frmLab1.cs</DependentUpon>
     </Compile>
     <Compile Include="Lab2\frmLab2A.cs">
@@ -64,9 +70,24 @@
     <Compile Include="Lab2\frmLab2B.Designer.cs">
       <DependentUpon>frmLab2B.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lab2\frmLab2C.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lab2\frmLab2C.Designer.cs">
+      <DependentUpon>frmLab2C.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lab3\Lab3A.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lab3\Lab3A.Designer.cs">
+      <DependentUpon>Lab3A.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmLab1.resx">
+    <EmbeddedResource Include="frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lab1\frmLab1.resx">
       <DependentUpon>frmLab1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Lab2\frmLab2A.resx">
@@ -74,6 +95,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Lab2\frmLab2B.resx">
       <DependentUpon>frmLab2B.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lab2\frmLab2C.resx">
+      <DependentUpon>frmLab2C.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lab3\Lab3A.resx">
+      <DependentUpon>Lab3A.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
