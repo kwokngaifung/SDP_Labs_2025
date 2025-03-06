@@ -34,6 +34,7 @@ namespace SDP_Labs_2025.Lab3
                 x = x * (1 + Convert.ToDouble(txtRate.Text));
                 count++;
             }
+            count++;
             lblMillion2.Text = Convert.ToString(count);
         }
     }
