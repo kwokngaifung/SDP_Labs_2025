@@ -19,7 +19,6 @@ namespace SDP_Labs_2025.Lab3
 
         private void btnCast_Click(object sender, EventArgs e)
         {
-           
             MessageBox.Show($"You voted for: \n{cboMovie.Text}", "Lab3");
         }
     }

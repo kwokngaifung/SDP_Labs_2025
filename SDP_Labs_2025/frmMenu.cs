@@ -33,6 +33,10 @@ namespace SDP_Labs_2025
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            if (cboLabs.SelectedItem == null)
+            {
+                return ;
+            }
             switch (cboLabs.SelectedItem.ToString())
             {
                 case "Lab1":
@@ -54,6 +58,14 @@ namespace SDP_Labs_2025
                 case "Lab3A":
                     frmLab3A lab3A = new frmLab3A();
                     lab3A.Show();
+                    break;
+                case "Lab3B":
+                    frmLab3B lab3B = new frmLab3B();
+                    lab3B.Show();
+                    break;
+                case "Lab3C":
+                    frmLab3C lab3C = new frmLab3C();
+                    lab3C.Show();
                     break;
             }
         }

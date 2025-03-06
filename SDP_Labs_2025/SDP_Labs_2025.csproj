@@ -82,6 +82,18 @@
     <Compile Include="Lab3\Lab3A.Designer.cs">
       <DependentUpon>Lab3A.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lab3\Lab3B.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lab3\Lab3B.Designer.cs">
+      <DependentUpon>Lab3B.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lab3\Lab3C.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lab3\Lab3C.Designer.cs">
+      <DependentUpon>Lab3C.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMenu.resx">
@@ -101,6 +113,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Lab3\Lab3A.resx">
       <DependentUpon>Lab3A.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lab3\Lab3B.resx">
+      <DependentUpon>Lab3B.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lab3\Lab3C.resx">
+      <DependentUpon>Lab3C.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
