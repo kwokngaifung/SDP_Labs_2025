@@ -28,45 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblresult = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lblResult = new System.Windows.Forms.Label();
+            button1 = new System.Windows.Forms.Button();
+            SuspendLayout();
             // 
-            // lblresult
+            // lblResult
             // 
-            this.lblresult.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lblresult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblresult.Location = new System.Drawing.Point(167, 155);
-            this.lblresult.Name = "lblresult";
-            this.lblresult.Size = new System.Drawing.Size(393, 145);
-            this.lblresult.TabIndex = 0;
+            lblResult.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            lblResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            lblResult.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblResult.Location = new System.Drawing.Point(195, 179);
+            lblResult.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblResult.Name = "lblResult";
+            lblResult.Size = new System.Drawing.Size(458, 167);
+            lblResult.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(167, 92);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 41);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Http Get";
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            button1.Location = new System.Drawing.Point(195, 106);
+            button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(181, 47);
+            button1.TabIndex = 1;
+            button1.Text = "Http Get";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // frmLab4
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.lblresult);
-            this.Name = "frmLab4";
-            this.Text = "frmLab4";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(button1);
+            Controls.Add(lblResult);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "frmLab4";
+            Text = "frmLab4";
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblresult;
+        private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Button button1;
     }
 }
