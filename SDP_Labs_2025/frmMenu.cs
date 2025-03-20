@@ -11,6 +11,7 @@ using SDP_Labs_2025.Lab1;
 using SDP_Labs_2025.Lab2;
 using SDP_Labs_2025.Lab3;
 using SDP_Labs_2025.Lab4;
+using SDP_Labs_2025.Lab5;
 
 namespace SDP_Labs_2025
 {
@@ -31,6 +32,7 @@ namespace SDP_Labs_2025
             cboLabs.Items.Add("Lab3B");
             cboLabs.Items.Add("Lab3C");
             cboLabs.Items.Add("Lab4");
+            cboLabs.Items.Add("Lab5");
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -72,6 +74,10 @@ namespace SDP_Labs_2025
                 case "Lab4":
                     frmLab4 lab4 = new frmLab4();
                     lab4.Show();
+                    break;
+                case "Lab5":
+                    frmLab5 lab5 = new frmLab5();
+                    lab5.Show();
                     break;
             }
         }
