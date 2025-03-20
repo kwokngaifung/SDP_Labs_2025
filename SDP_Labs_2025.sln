@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDP_Labs_2025", "SDP_Labs_2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDP_WebAPI", "SDP_WebAPI\SDP_WebAPI.csproj", "{D601E069-C3DE-4C62-9105-B68036716D42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccessController", "DatabaseAccessController\DatabaseAccessController.csproj", "{11B31ED2-EC3E-4D95-89D6-370B9FA9F571}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D601E069-C3DE-4C62-9105-B68036716D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D601E069-C3DE-4C62-9105-B68036716D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D601E069-C3DE-4C62-9105-B68036716D42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B31ED2-EC3E-4D95-89D6-370B9FA9F571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B31ED2-EC3E-4D95-89D6-370B9FA9F571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B31ED2-EC3E-4D95-89D6-370B9FA9F571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B31ED2-EC3E-4D95-89D6-370B9FA9F571}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
