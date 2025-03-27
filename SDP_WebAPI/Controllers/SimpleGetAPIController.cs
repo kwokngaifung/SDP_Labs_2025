@@ -35,5 +35,18 @@ namespace SDP_WebAPI.Controllers
             return jsonString;
         }
 
+        [HttpGet("GetSpecificCustomerData")]
+        public String GetSpecificCustomerData(string customerFirstName)
+        {
+            dboGetCompanyData dboGetCompanyData = new dboGetCompanyData(_configuration["ConnectionStrings"]);
+            DataTable dtResult = dboGetCompanyData.GetcustomerFirstNameData(customerFirstName);
+
+            // Convert DataTable to JSON string
+            string jsonString = JsonConvert.SerializeObject(dtResult);
+
+            // Return JSON string
+            return jsonString;
+        }
+
     }
 }

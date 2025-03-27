@@ -66,5 +66,53 @@ namespace SDP_Labs_2025.Lab5
                 throw ex;
             }
         }
+
+        private async void butSearch_Click(object sender, EventArgs e)
+        {
+            DataTable dt = await GetCustomerFirstNameDataFromApiResponse();
+            dgvCustomerDetails.DataSource = dt;
+            dt.AcceptChanges();
+        }
+
+        private async Task<DataTable> GetCustomerFirstNameDataFromApiResponse()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(ConfigurationManager.AppSettings["ServerAddress"]); // Adjust the base address as needed
+                    HttpResponseMessage response = await client.GetAsync($"/api/SimpleGetAPI/GetSpecificCustomerData?customerFirstName={txtCustomerName.Text}");
+
+                    // Check if the response is successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonString = await response.Content.ReadAsStringAsync();
+
+                        DataTable dataTable = JsonConvert.DeserializeObject<DataTable>(jsonString);
+
+                        return dataTable;
+                    }
+                    else
+                    {
+                        // Log the status code and reason
+                        string error = $"Error: {response.StatusCode} - {response.ReasonPhrase}";
+                        throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                // Log the exception message
+                MessageBox.Show($"Request error: {e.Message}");
+                throw e;
+            }
+            catch (Exception ex)
+            {
+                // Log any other exceptions
+                MessageBox.Show($"An error occurred: {ex.Message}");
+                throw ex;
+            }
+        }
+
     }
 }

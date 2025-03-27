@@ -13,5 +13,11 @@ namespace DatabaseAccessController
             String sqlCmd = "SELECT * FROM customers";
             return GetData(sqlCmd);
         }
+
+        public DataTable GetcustomerFirstNameData(String customerFirstName)
+        {
+            String sqlCmd = "SELECT * FROM customers where contactFirstName = '" + customerFirstName + "'";
+            return GetData(sqlCmd);
+        }
     }
 }

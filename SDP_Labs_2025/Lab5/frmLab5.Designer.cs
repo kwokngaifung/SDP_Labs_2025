@@ -30,6 +30,9 @@
         {
             lblCustomerDetails = new System.Windows.Forms.Label();
             dgvCustomerDetails = new System.Windows.Forms.DataGridView();
+            lblCustomerName = new System.Windows.Forms.Label();
+            txtCustomerName = new System.Windows.Forms.TextBox();
+            butSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)dgvCustomerDetails).BeginInit();
             SuspendLayout();
             // 
@@ -37,7 +40,7 @@
             // 
             lblCustomerDetails.AutoSize = true;
             lblCustomerDetails.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            lblCustomerDetails.Location = new System.Drawing.Point(57, 30);
+            lblCustomerDetails.Location = new System.Drawing.Point(57, 21);
             lblCustomerDetails.Name = "lblCustomerDetails";
             lblCustomerDetails.Size = new System.Drawing.Size(155, 25);
             lblCustomerDetails.TabIndex = 0;
@@ -46,16 +49,45 @@
             // dgvCustomerDetails
             // 
             dgvCustomerDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCustomerDetails.Location = new System.Drawing.Point(57, 69);
+            dgvCustomerDetails.Location = new System.Drawing.Point(57, 134);
             dgvCustomerDetails.Name = "dgvCustomerDetails";
             dgvCustomerDetails.Size = new System.Drawing.Size(597, 282);
             dgvCustomerDetails.TabIndex = 1;
+            // 
+            // lblCustomerName
+            // 
+            lblCustomerName.AutoSize = true;
+            lblCustomerName.Location = new System.Drawing.Point(57, 84);
+            lblCustomerName.Name = "lblCustomerName";
+            lblCustomerName.Size = new System.Drawing.Size(97, 15);
+            lblCustomerName.TabIndex = 2;
+            lblCustomerName.Text = "Customer Name:";
+            // 
+            // txtCustomerName
+            // 
+            txtCustomerName.Location = new System.Drawing.Point(172, 81);
+            txtCustomerName.Name = "txtCustomerName";
+            txtCustomerName.Size = new System.Drawing.Size(150, 23);
+            txtCustomerName.TabIndex = 3;
+            // 
+            // butSearch
+            // 
+            butSearch.Location = new System.Drawing.Point(360, 80);
+            butSearch.Name = "butSearch";
+            butSearch.Size = new System.Drawing.Size(75, 23);
+            butSearch.TabIndex = 4;
+            butSearch.Text = "Search";
+            butSearch.UseVisualStyleBackColor = true;
+            butSearch.Click += butSearch_Click;
             // 
             // frmLab5
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(butSearch);
+            Controls.Add(txtCustomerName);
+            Controls.Add(lblCustomerName);
             Controls.Add(dgvCustomerDetails);
             Controls.Add(lblCustomerDetails);
             Name = "frmLab5";
@@ -70,5 +102,8 @@
 
         private System.Windows.Forms.Label lblCustomerDetails;
         private System.Windows.Forms.DataGridView dgvCustomerDetails;
+        private System.Windows.Forms.Label lblCustomerName;
+        private System.Windows.Forms.TextBox txtCustomerName;
+        private System.Windows.Forms.Button butSearch;
     }
 }
