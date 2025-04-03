@@ -69,7 +69,15 @@ namespace SDP_Labs_2025.Lab5
 
         private async void butSearch_Click(object sender, EventArgs e)
         {
-            DataTable dt = await GetCustomerFirstNameDataFromApiResponse();
+            DataTable dt;
+            if (txtCustomerName.Text == "")
+            {
+                dt = await GetCustomerDataFromApiResponse();
+            }
+            else
+            {
+                dt = await GetCustomerFirstNameDataFromApiResponse();
+            }
             dgvCustomerDetails.DataSource = dt;
             dt.AcceptChanges();
         }
