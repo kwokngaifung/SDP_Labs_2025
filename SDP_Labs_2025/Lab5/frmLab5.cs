@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using SDP_EntityModels;
 
 namespace SDP_Labs_2025.Lab5
 {
@@ -22,89 +23,97 @@ namespace SDP_Labs_2025.Lab5
 
         private async void frmLab5_Load(object sender, EventArgs e)
         {
-            DataTable dt = await GetCustomerDataFromApiResponse();
-            dgvCustomerDetails.DataSource = dt;
-            dt.AcceptChanges();
-        }
-
-        private async Task<DataTable> GetCustomerDataFromApiResponse()
-        {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(ConfigurationManager.AppSettings["ServerAddress"]); // Adjust the base address as needed
-                    HttpResponseMessage response = await client.GetAsync("/api/SimpleGetAPI/GetCustomerData");
-
-                    // Check if the response is successful
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string jsonString = await response.Content.ReadAsStringAsync();
-
-                        DataTable dataTable = JsonConvert.DeserializeObject<DataTable>(jsonString);
-
-                        return dataTable;
-                    }
-                    else
-                    {
-                        // Log the status code and reason
-                        string error = $"Error: {response.StatusCode} - {response.ReasonPhrase}";
-                        throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
-                    }
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                // Log the exception message
-                MessageBox.Show($"Request error: {e.Message}");
-                throw e;
+                APICaller apiCaller = new APICaller();
+                String jsonString = await apiCaller.GetApiResponse("/api/SimpleGetAPI/GetCustomerData");
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jsonString);
+                dgvCustomerDetails.DataSource = dt;
+                dt.AcceptChanges();
             }
             catch (Exception ex)
             {
-                // Log any other exceptions
                 MessageBox.Show($"An error occurred: {ex.Message}");
-                throw ex;
             }
         }
 
         private async void butSearch_Click(object sender, EventArgs e)
         {
-            DataTable dt;
-            if (txtCustomerName.Text == "")
+            try
             {
-                dt = await GetCustomerDataFromApiResponse();
+                APICaller apiCaller = new APICaller();
+                String jsonString = await apiCaller.GetApiResponse($"/api/SimpleGetAPI/GetSpecificCustomerData?customerFirstName={txtCustomerName.Text}");
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jsonString);
+                dgvCustomerDetails.DataSource = dt;
+                dt.AcceptChanges();
             }
-            else
+            catch (Exception ex)
             {
-                dt = await GetCustomerFirstNameDataFromApiResponse();
-            }
-            dgvCustomerDetails.DataSource = dt;
-            dt.AcceptChanges();
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            };
         }
 
-        private async Task<DataTable> GetCustomerFirstNameDataFromApiResponse()
+        private async void btnUpdate_Click(object sender, EventArgs e)
+        {
+            DataTable dtUpdated = (DataTable)dgvCustomerDetails.DataSource;
+            dtUpdated = dtUpdated.GetChanges();
+
+            if (dtUpdated != null)
+            {
+                int rowsUpdated = await UpdateCustomerDataToAPI(dtUpdated);
+                if (rowsUpdated > 0)
+                {
+                    dtUpdated.AcceptChanges();
+                    dgvCustomerDetails.DataSource = dtUpdated.Copy();
+                }
+                MessageBox.Show($"{rowsUpdated} rows updated successfully.");
+            }
+        }
+
+        private async Task<int> UpdateCustomerDataToAPI(DataTable dtUpdated)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(ConfigurationManager.AppSettings["ServerAddress"]); // Adjust the base address as needed
-                    HttpResponseMessage response = await client.GetAsync($"/api/SimpleGetAPI/GetSpecificCustomerData?customerFirstName={txtCustomerName.Text}");
+                    client.BaseAddress = new Uri(ConfigurationManager.AppSettings["ServerAddress"]);
 
-                    // Check if the response is successful
+                    // Serialize DataTable to JSON
+                    DataTable dtAdded = dtUpdated.GetChanges(DataRowState.Added);
+                    string jsonAdded = JsonConvert.SerializeObject(dtAdded, Formatting.Indented);
+                    DataTable dtModified = dtUpdated.GetChanges(DataRowState.Modified);
+                    string jsonModified = JsonConvert.SerializeObject(dtModified, Formatting.Indented);
+                    DataTable dtDeleted = dtUpdated.GetChanges(DataRowState.Deleted);
+                    string jsonDeleted = JsonConvert.SerializeObject(dtDeleted, Formatting.Indented);
+
+                    JsonDataTable jsonDT = new JsonDataTable();
+                    jsonDT.dtAdded = jsonAdded;
+                    jsonDT.dtModified = jsonModified;
+                    jsonDT.dtDeleted = jsonDeleted;
+                    string jsonString = JsonConvert.SerializeObject(jsonDT);
+
+                    StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+
+                    // Send POST request to the Web API
+                    HttpResponseMessage response = await client.PostAsync("/api/SimpleGetAPI/UpdateCustomerData", content);
+
+                    // Ensure the request was successful
                     if (response.IsSuccessStatusCode)
                     {
-                        string jsonString = await response.Content.ReadAsStringAsync();
+                        // Read the response content as a string
+                        string responseString = await response.Content.ReadAsStringAsync();
 
-                        DataTable dataTable = JsonConvert.DeserializeObject<DataTable>(jsonString);
+                        // Parse the response string to an integer
+                        int rowsUpdated = int.Parse(responseString);
 
-                        return dataTable;
+                        return rowsUpdated;
                     }
                     else
                     {
-                        // Log the status code and reason
-                        string error = $"Error: {response.StatusCode} - {response.ReasonPhrase}";
-                        throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        return 0;
                     }
                 }
             }

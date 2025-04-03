@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DatabaseAccessController;
 using Newtonsoft.Json;
+using SDP_EntityModels;
 
 namespace SDP_WebAPI.Controllers
 {
@@ -46,6 +47,23 @@ namespace SDP_WebAPI.Controllers
 
             // Return JSON string
             return jsonString;
+        }
+
+        [HttpPost("UpdateCustomerData")]
+        public int UpdateCustomerData([FromBody] JsonDataTable json)
+        {
+            try
+            {
+                DataTable dtUpdated = JsonConvert.DeserializeObject<DataTable>(json.dtModified);
+
+                dboGetCompanyData dboGetCompanyData = new dboGetCompanyData(_configuration["ConnectionStrings"]);
+                int rowsUpdated = dboGetCompanyData.UpdateCustomerData(dtUpdated);
+                return rowsUpdated;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }

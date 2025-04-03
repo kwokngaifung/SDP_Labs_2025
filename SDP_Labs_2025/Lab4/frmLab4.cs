@@ -29,7 +29,7 @@ namespace SDP_Labs_2025.Lab4
             }
             catch (Exception ex)
             {
-                MessageBox.Show("");
+                MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
 
