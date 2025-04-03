@@ -42,7 +42,15 @@ namespace SDP_Labs_2025.Lab5
             try
             {
                 APICaller apiCaller = new APICaller();
-                String jsonString = await apiCaller.GetApiResponse($"/api/SimpleGetAPI/GetSpecificCustomerData?customerFirstName={txtCustomerName.Text}");
+                String jsonString;
+                if (txtCustomerName.Text == "")
+                {
+                    jsonString = await apiCaller.GetApiResponse("/api/SimpleGetAPI/GetCustomerData");
+                }
+                else
+                {
+                    jsonString = await apiCaller.GetApiResponse($"/api/SimpleGetAPI/GetSpecificCustomerData?customerFirstName={txtCustomerName.Text}");
+                } 
                 DataTable dt = JsonConvert.DeserializeObject<DataTable>(jsonString);
                 dgvCustomerDetails.DataSource = dt;
                 dt.AcceptChanges();
