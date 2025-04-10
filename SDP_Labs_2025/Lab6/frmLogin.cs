@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Microsoft.VisualBasic.Logging;
+using Newtonsoft.Json;
+using SDP_EntityModels;
+using System.Security.Cryptography;
+
+namespace SDP_Labs_2025.Lab6
+{
+    public partial class frmLogin : Form
+    {
+        public bool isLogin = false;
+
+        public frmLogin()
+        {
+            InitializeComponent();
+            isLogin = false;
+        }
+        private string SanitizeInput(string input)
+        {
+            List<string> forbiddenWords = new List<string> { "or", "Or", "oR", "OR", "and", "And", "AND" };
+            foreach (var word in forbiddenWords)
+            {
+                input = input.Replace(word, "", StringComparison.OrdinalIgnoreCase);
+            }
+            return input;
+        }
+
+        private async void btnSubmit_Click(object sender, EventArgs e)
+        {
+            int registerUser = await user_login(SanitizeInput(txtbox_username.Text), SanitizeInput(txtbox_password.Text));
+
+            if (registerUser == 1)
+            {
+                isLogin = true;
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect user name or password. " + "Please try again.");
+                isLogin = false;
+                txtbox_username.Text = "";
+                txtbox_password.Text = "";
+            }
+        }
+
+        private async Task<int> user_login(String username, String password)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(ConfigurationManager.AppSettings["ServerAddress"]);
+
+                    // Create a new instance of LoginRequest and set its properties
+                    LoginRequest jsonLoginRequest = new LoginRequest();
+                    jsonLoginRequest.username = username;
+                    jsonLoginRequest.password = HashPassword(password);
+                    string jsonString = JsonConvert.SerializeObject(jsonLoginRequest);
+
+                    StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    // Send POST request to the Web API
+                    HttpResponseMessage response = await client.PostAsync("/api/UserLogin/LoginUser", content);
+
+                    // Ensure the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Read the response content as a string
+                        string responseString = await response.Content.ReadAsStringAsync();
+                        return 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        return 0;
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                // Log the exception message
+                MessageBox.Show($"Request error: {e.Message}");
+                throw e;
+            }
+            catch (Exception ex)
+            {
+                // Log any other exceptions
+                MessageBox.Show($"An error occurred: {ex.Message}");
+                throw ex;
+            }
+        }
+
+        public static string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+    }
+}

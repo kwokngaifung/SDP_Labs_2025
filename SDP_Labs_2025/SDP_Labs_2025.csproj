@@ -14,4 +14,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SDP_EntityModels\SDP_EntityModels.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Lab6\frmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>
