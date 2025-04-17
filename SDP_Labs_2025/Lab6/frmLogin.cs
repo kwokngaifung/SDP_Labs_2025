@@ -27,7 +27,7 @@ namespace SDP_Labs_2025.Lab6
         }
         private string SanitizeInput(string input)
         {
-            List<string> forbiddenWords = new List<string> { "or", "Or", "oR", "OR", "and", "And", "AND" };
+            List<string> forbiddenWords = new List<string> {" or ", " Or "};
             foreach (var word in forbiddenWords)
             {
                 input = input.Replace(word, "", StringComparison.OrdinalIgnoreCase);
