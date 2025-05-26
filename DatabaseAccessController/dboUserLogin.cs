@@ -16,13 +16,13 @@ namespace DatabaseAccessController
 
         public int RegisterUser(string username, string password)
         {
-            String sqlCmd = $"INSERT INTO `users` (`username`, `password`) VALUES ('{username}', '{password}')";
-            return BatchUpdate(sqlCmd);
+                String sqlCmd = $"INSERT INTO `users` (`username`, `password`) VALUES ('{username}', '{password}')";
+                return BatchUpdate(sqlCmd);
         }
 
         public DataTable LoginUser(string username, string password)
         {
-            String sqlCmd = $"SELECT * FROM `users` WHERE username = '123' AND password = 'abc';";
+            String sqlCmd = $"SELECT * FROM `users` WHERE username = '{username}' AND password = '{password}';";
             return GetData(sqlCmd);
         }
     }

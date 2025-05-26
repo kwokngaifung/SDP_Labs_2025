@@ -77,7 +77,14 @@ namespace SDP_Labs_2025.Lab6
                     {
                         // Read the response content as a string
                         string responseString = await response.Content.ReadAsStringAsync();
-                        return 1;
+                        if (responseString == "true")
+                        {
+                            return 1;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
                     }
                     else
                     {

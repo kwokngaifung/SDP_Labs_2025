@@ -48,13 +48,9 @@ namespace SDP_WebAPI.Controllers
                 dboUserLogin dboUserLogin = new dboUserLogin(_configuration["ConnectionStrings"]);
                 DataTable rowsUpdated = dboUserLogin.LoginUser(username, password);
 
-                // Convert DataTable to JSON string
                 string jsonString = JsonConvert.SerializeObject(rowsUpdated);
-                dynamic loginData = JsonConvert.DeserializeObject(jsonString);
-                // Return JSON string
-                //[{"username":"123","password":"abc"}]
 
-                if (loginData[0].username == username && loginData[0].password == password)
+                if (jsonString != "[]")
                 {
                     return true;
                 }

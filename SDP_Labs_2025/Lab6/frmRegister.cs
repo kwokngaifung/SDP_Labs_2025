@@ -30,9 +30,9 @@ namespace SDP_Labs_2025.Lab6
                 MessageBox.Show("User registered successfully.");
                 Close();
             }
-            else
+            else if (registerUser == 0)
             {
-                // Handle the error case
+                MessageBox.Show("Already has this name");
             }
         }
 
